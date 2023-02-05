@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block form %}
+<div class="row">
+    <div class="col">
+        <form method="POST" action="{{url_for('submit')}}">
+            <div class="form-row">
+                <div class="col-12 mt-3">
+                    <div class="col"><input type="text" class="form-control" name="query" placeholder="Type anything about plant characteristic"></div>
+                    <div class="col-auto"><button type="submit" class="btn btn-primary">Confirm</button></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}

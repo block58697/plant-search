@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block submit %}
+<div class="row">
+  <div class="col">
+    <p>Search result：{{query_submit}}</p>
+    <p>{{name_reslt}}</p>
+
+  </div>
+</div>
+<form method="POST" action="{{url_for('form')}}">
+  <div class="col-12 mt-3 pt-3">
+    <button type="submit" class="btn btn-primary">回上一頁
+    </button>
+
+  </div>
+</form>
+{% for table in tables %}
+            {{ table|safe }}
+{% endfor %}
+{% endblock %}
