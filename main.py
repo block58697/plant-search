@@ -33,7 +33,7 @@ def submit():
     query_submit = request.values['query']
 
     reconstructed_model = keras.models.load_model("Lauraceae_LSTM_sigmoid.tf")#,custom_objects={'CustomMetric':CategoricalAccuracy('balanced_accuracy')})
-    f = open('encode_dict.txt','r')
+    f = open('Lauraceae_encode_dict.txt','r')
     encode_dict=eval(f.read())
 
     with open('Lauraceae_LSTM_tokenizer.pickle', 'rb') as handle:
@@ -42,7 +42,7 @@ def submit():
     def make_clickable(val,name):
         return f'<a href="{val}">{name}</a>'
 
-    df = pd.read_csv('crawler_result.csv')
+    df = pd.read_csv('crawler_result_Lauraceae.csv')
 
     def Query(str):
         x_query = tokenizer.texts_to_sequences([str])
@@ -53,9 +53,9 @@ def submit():
         validation = reconstructed_model.predict(x_query)
         #result = pd.DataFrame(columns=['name','score','link'])
         result = pd.DataFrame(columns=['name', 'score'])
-        for key , value in zip(encode_dict.keys(),validation[0]*100):
+        for key , value in zip(encode_dict.keys(), validation[0]*100):
             u = df[df["scname"]==key]['url'].squeeze()
-
+            value = round(value, 3)
             #df_new_row = pd.DataFrame({'name':key,'score':value,'link':make_clickable(u, key)},index=[0])
             df_new_row = pd.DataFrame({'score':value, 'name':make_clickable(u, key)},index=[0])
             result = pd.concat([result, df_new_row])
