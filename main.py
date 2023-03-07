@@ -2,7 +2,7 @@ from flask import request, Flask, render_template
 import pandas as pd 
 import numpy as np
 import time
-import keras
+#import keras
 import pickle
 import tensorflow as tf
 app = Flask(__name__, template_folder='templates')
@@ -32,8 +32,8 @@ def submit():
     #df = pd.read_csv('crawler_complete.csv')#記得要加路徑 Don't forget add the whole path.
     query_submit = request.values['query']
 
-    reconstructed_model = keras.models.load_model("Lauraceae_LSTM_sigmoid.tf")#,custom_objects={'CustomMetric':CategoricalAccuracy('balanced_accuracy')})
-    f = open('encode_dict.txt','r')
+    reconstructed_model = tf.keras.models.load_model("Lauraceae_LSTM_sigmoid.tf")#,custom_objects={'CustomMetric':CategoricalAccuracy('balanced_accuracy')})
+    f = open('Lauraceae_encode_dict.txt','r')
     encode_dict=eval(f.read())
 
     with open('Lauraceae_LSTM_tokenizer.pickle', 'rb') as handle:
